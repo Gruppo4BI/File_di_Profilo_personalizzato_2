@@ -6,27 +6,13 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Borsa delle idee</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 100%}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-        
-    /* On small screens, set height to 'auto' for the grid */
-    @media screen and (max-width: 767px) {
-      .row.content {height: auto;} 
-    }
-  </style>
+ <link href="menu.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <?php
@@ -54,11 +40,11 @@ $dati_tel=mysqli_fetch_assoc($result_tel);
 ?>
 
 <!-- sono classi predefinite, inverse vuol dire sfondo scuro
-	quella di default  chiara -->
-<nav class="navbar navbar-inverse">
+	quella di default ¬è chiara -->
+<nav class="navbar navbar-default">
   <div class="container-fluid">
   
-  <!-- questo  l header contiene gli elementi che devono essere visibili anche quando la barra  minimizzata per i display di piccole dimensioni -->
+  <!-- questo ¬è l header contiene gli elementi che devono essere visibili anche quando la barra ¬è minimizzata per i display di piccole dimensioni -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -66,7 +52,7 @@ $dati_tel=mysqli_fetch_assoc($result_tel);
         <span class="icon-bar"></span>   
         <!-- Ciascuno di questi disegna una lineetta sul pulsante quando si minimizza la pagina -->                     
       </button>
-      <a class="navbar-brand">Borsa delle Idee</a>
+       <a class="navbar-brand" href="">Borsa delle Idee</a>
     </div>
  <!--  elementi della barra -->
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -108,7 +94,7 @@ $dati_tel=mysqli_fetch_assoc($result_tel);
 
 <?php 
 // mi permette di mostrare dei messaggi di errore o di successo di modifica, si riferisce alla pagina emodifica.php 
-if( isset($_GET['modifica']) ) // se modifica  settato entro nel if  e con uno switch distinguo i vari casi 
+if( isset($_GET['modifica']) ) // se modifica ¬è settato entro nel if  e con uno switch distinguo i vari casi 
 {
 	echo "<p id='box_modifica'>";
 	switch ($_GET['modifica'])
@@ -130,8 +116,9 @@ if( isset($_GET['modifica']) ) // se modifica  settato entro nel if  e con uno
   </div>
 <div class="container-fluid">
   <div class="row content">
-    <div class="col-sm-3 sidenav hidden-xs">
-      <h2><?php echo $dati['nome_azienda']?> <img src="immagini\nala.jpg" width="150" height="80"> </h2>
+    <div class="col-sm-2 sidenav hidden-xs" style="text-align: center; margin-left:20px">
+      <h2><?php echo $dati['nome_azienda']?></h2><br/>
+      <img src="logo.png">
   <?php if($_SESSION['id']===$_GET['id'])
   { 
      echo '<div class="container"> 
@@ -142,23 +129,28 @@ if( isset($_GET['modifica']) ) // se modifica  settato entro nel if  e con uno
     </div>
     <br>
     <div class="col-sm-9">
-      <div class="well">
-        <h4>La nostra azienda</h4>
-        <p><?php  echo $dati['parlaci']?> </p>
-      </div>
+        <?php  // usiamo null perchè è un testo
+      if( !($dati[parlaci]==NULL) ){
+      	echo " <div class='well'>
+		<h4> La nostra azienda </h4> <p>".$dati['parlaci']."</p></div>";
+      }
+?>
       <div class="row">
         <div class="col-sm-4">
           <div class="well">
-            <h4>Users</h4>
-            <p> Utente fondatore <br/> Utente partecipante <br/> <?php echo $dati['persona_di_riferimento']?></p> 
+            <h4>Utenti</h4>
+            <p> <?php echo $dati['persona_di_riferimento']?></p> 
           </div>
         </div>
         <div class="col-sm-4">
           <div class="well">
-            <h4>Sito:</h4>
-            <p style="text-align:right"><?php echo $dati['sito_web']?> </p> 
+    <?php  
+     		 if( !($dati[sito_web]==NULL) ){
+      	echo " <h4>Sito web </h4> <p><a href= https://".$dati['sito_web'].">".$dati['sito_web']." </a></p>";
+      }
+?>
             <h4> Email</h4>
-            <p>  <p style="text-align:right"><?php echo $dati['email']?></p> </p>
+           <p style="text-align:right"><?php echo $dati['email']?></p> 
           </div>
         </div>
         <div class="col-sm-4">
@@ -169,7 +161,7 @@ if( isset($_GET['modifica']) ) // se modifica  settato entro nel if  e con uno
         </div>
       </div>
       <div class="row">
-       <div class="col-sm-5">
+       <div class="col-sm-4">
           <div class="well">
           <h4> Citta </h4>
             <p><?php echo $dati['citta']?></p> 
@@ -188,10 +180,10 @@ if( isset($_GET['modifica']) ) // se modifica  settato entro nel if  e con uno
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <div class="well">
           <h4>Telefono</h4> 
- <?php echo  "<p>".$dati_tel['numero']."</p>"; // ottengo i dati dall array dati_tel che  stato creato precedentemente, usando come chiavi i nomi delle colonne nel db
+ <?php echo  "<p>".$dati_tel['numero']."</p>"; // ottengo i dati dall array dati_tel che ¬è stato creato precedentemente, usando come chiavi i nomi delle colonne nel db
 	 if( !($dati_tel['numero2']==0) ) // gli if mi permettono di non mostrare nulla nel caso questi campi non siano presnti nel db
 		echo "<h4> Telefono 2 </h4> <p>".$dati_tel['numero2']."</p>";
 	  if( !($dati_tel['fax']==0) )

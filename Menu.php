@@ -112,17 +112,18 @@ $dati_tel=mysqli_fetch_assoc($result_tel);
 // mi permette di mostrare dei messaggi di errore o di successo di modifica, si riferisce alla pagina emodifica.php 
 if( isset($_GET['modifica']) ) // se modifica  settato entro nel if  e con uno switch distinguo i vari casi 
 {
-	echo "<p id='box_modifica'>";
+	echo "<p id='box_modifica'>";   
+												    
 	switch ($_GET['modifica'])
 	{
 	case 1:
-		echo "<div class='alert alert-warning'>
+		echo "<div class='alert alert-warning'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
     <strong>Success!</strong> Aggiornamento non riuscito!
   </div>";
 		break;
 		
 	case 2:
-		echo "<div class='alert alert-success'>
+		echo "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
     <strong>Success!</strong> Aggiornamento riuscito!
   </div>";
 		break;

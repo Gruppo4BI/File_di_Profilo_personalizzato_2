@@ -46,11 +46,12 @@
   </style>
 </head> 
 	  <!-- sono classi predefinite, inverse vuol dire sfondo scuro
-	quella di default  chiara -->
-<nav class="navbar navbar-inverse">
+	quella di default ¬è chiara -->
+	<body style="background-color: #5D8AA8;">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
   
-  <!-- questo  l header contiene gli elementi che devono essere visibili anche quando la barra  minimizzata per i display di piccole dimensioni -->
+  <!-- questo ¬è l header contiene gli elementi che devono essere visibili anche quando la barra ¬è minimizzata per i display di piccole dimensioni -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -155,4 +156,3 @@
 	?> 
 	  </body> 
 </html> 
-
